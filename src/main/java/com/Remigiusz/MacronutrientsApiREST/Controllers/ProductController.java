@@ -1,10 +1,9 @@
 package com.Remigiusz.MacronutrientsApiREST.Controllers;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.ProductORM;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Service.ProductCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +17,9 @@ public class ProductController {
     ProductCRUDService crudService;
 
     @PostMapping("/product")
-    public void saveProduct(@RequestBody ProductORM productORM)
+    public void saveProduct(@RequestBody Product product)
     {
-        crudService.saveProduct(productORM);
+        crudService.saveProduct(product);
     }
 
     @DeleteMapping("/product")
@@ -31,7 +30,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{id}")
-    ProductORM getProductById(@PathVariable int id)
+    Product getProductById(@PathVariable int id)
     {
         return crudService.getProductbyId(id);
 
@@ -39,14 +38,15 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    ProductORM getProductByName(@RequestParam(value = "name",required = true) String name)
+    Product getProductByName(@RequestParam(value = "name",required = true) String name)
     {
       return crudService.getProductbyName(name);
     }
+
     @GetMapping("/products")
-    List<ProductORM> getAllProducts()
+    List<Product> getAllProducts()
     {
-        List<ProductORM> productList=crudService.getAllProducts();
+        List<Product> productList=crudService.getAllProducts();
         return productList;
 
     }

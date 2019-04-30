@@ -1,7 +1,6 @@
 package com.Remigiusz.MacronutrientsApiREST.DAO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,9 +10,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "product")
-public class ProductORM {
+public class Product {
 
-    public ProductORM() {
+    public Product() {
 
     }
 
@@ -39,10 +38,10 @@ public class ProductORM {
             ,joinColumns = @JoinColumn(name = "produkt_id")
             ,inverseJoinColumns = @JoinColumn(name = "day_of_life_id"))
     @JsonIgnore
-    List<DayORM> daysList=new ArrayList<>();
+    List<Day> daysList=new ArrayList<>();
 
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
-    List<DayProductsConnectionORM> connectionsList=new ArrayList<>();
+    List<DayProductsConnection> connectionsList=new ArrayList<>();
 
 
 

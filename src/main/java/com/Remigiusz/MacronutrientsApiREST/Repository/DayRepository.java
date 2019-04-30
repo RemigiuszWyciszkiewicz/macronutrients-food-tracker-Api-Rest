@@ -1,9 +1,10 @@
-/*
+
 package com.Remigiusz.MacronutrientsApiREST.Repository;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.DayORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.ProductORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.UserORM;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Day;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
+
+import com.Remigiusz.MacronutrientsApiREST.DAO.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,14 +14,14 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface DayRepository extends JpaRepository<DayORM,Integer> {
+public interface DayRepository extends JpaRepository<Day,Integer> {
 
 
 
-    List<DayORM> findAllByDate(Date date);
-    DayORM findDayORMByDate(Date date);
-    DayORM findDayORMByDateAndAndUserORM(Date date, UserORM userORM);
+    List<Day> findAllByDate(Date date);
+    Day findDayORMByDate(Date date);
+    Day findDayORMByDateAndAndUserORM(Date date, User userORM);
 
 
 }
-*/
+

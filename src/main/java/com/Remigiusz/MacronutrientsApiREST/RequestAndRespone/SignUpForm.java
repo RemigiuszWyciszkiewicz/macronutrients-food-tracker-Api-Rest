@@ -1,4 +1,4 @@
-package com.Remigiusz.MacronutrientsApiREST.message.request;
+package com.Remigiusz.MacronutrientsApiREST.RequestAndRespone;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

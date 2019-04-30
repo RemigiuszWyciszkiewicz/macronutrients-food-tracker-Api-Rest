@@ -1,8 +1,6 @@
 package com.Remigiusz.MacronutrientsApiREST.DAO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,12 +12,12 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "day")
-public class DayORM {
+public class Day {
 
-    public DayORM() {
+    public Day() {
     }
 
-    public DayORM(Date data) {
+    public Day(Date data) {
         this.date =data;
     }
 
@@ -37,11 +35,11 @@ public class DayORM {
     @JoinTable(name = "day_product"
             ,joinColumns = @JoinColumn(name = "day_of_life_id")
             ,inverseJoinColumns =@JoinColumn(name = "produkt_id") )
-    List<ProductORM> products =new ArrayList<>();
+    List<Product> products =new ArrayList<>();
 
 
     @OneToMany(mappedBy = "day",fetch = FetchType.LAZY)
-    List<DayProductsConnectionORM> ListOfConnections =new ArrayList<>();
+    List<DayProductsConnection> ListOfConnections =new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne(cascade ={ CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})

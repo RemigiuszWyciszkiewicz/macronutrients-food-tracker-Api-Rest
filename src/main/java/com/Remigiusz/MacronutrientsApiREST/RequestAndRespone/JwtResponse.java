@@ -1,4 +1,4 @@
-package com.Remigiusz.MacronutrientsApiREST.message.response;
+package com.Remigiusz.MacronutrientsApiREST.RequestAndRespone;
 
 import org.springframework.security.core.GrantedAuthority;
 

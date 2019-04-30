@@ -1,9 +1,9 @@
-package com.Remigiusz.MacronutrientsApiREST.message.response;
+package com.Remigiusz.MacronutrientsApiREST.Exceptions;
 
-public class ResponseMessage {
+public class SimpleMessage {
 	private String message;
 
-	public ResponseMessage(String message) {
+	public SimpleMessage(String message) {
 		this.message = message;
 	}
 

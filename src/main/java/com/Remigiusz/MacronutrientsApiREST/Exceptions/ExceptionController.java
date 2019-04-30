@@ -33,13 +33,6 @@ public class ExceptionController {
         return new ResponseEntity<>(customerErrorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<ErrorDetails> response401(Exception401_UNAUTHORIZED e, WebRequest webRequest)
-    {
-        ErrorDetails customerErrorResponse=new ErrorDetails(HttpStatus.UNAUTHORIZED.value(),e.getMessage(),webRequest.getDescription(false));
-
-        return new ResponseEntity<>(customerErrorResponse, HttpStatus.UNAUTHORIZED);
-    }
 
 
 }

@@ -1,7 +1,5 @@
 package com.Remigiusz.MacronutrientsApiREST.DAO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 
@@ -52,7 +50,7 @@ public class User {
 
 
    @OneToMany(mappedBy = "userORM",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-   List<DayORM> dayORMS=new ArrayList<>();
+   List<Day> days =new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

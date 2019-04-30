@@ -1,10 +1,10 @@
-/*
+
 package com.Remigiusz.MacronutrientsApiREST.Service;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.DayORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.DayProductsConnectionORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.ProductORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.UserORM;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Day;
+import com.Remigiusz.MacronutrientsApiREST.DAO.DayProductsConnection;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
+import com.Remigiusz.MacronutrientsApiREST.DAO.User;
 import com.Remigiusz.MacronutrientsApiREST.Repository.ConnectionRepository;
 import com.Remigiusz.MacronutrientsApiREST.Repository.DayRepository;
 import net.minidev.json.JSONArray;
@@ -30,12 +30,12 @@ public class DayCRUDService {
     @Autowired UserService userService;
 
     @Transactional
-    public void addNewDay(int id,String date)
+    public void addNewDay(long id,String date)
     {
-        DayORM dayORM=new DayORM();
+        Day dayORM=new Day();
         dayORM.setDate(addOneDayToDate(date));
 
-        UserORM userORM1=userService.findUserById(id);
+        User userORM1=userService.findUserById(id);
         dayORM.setUserORM(userORM1);
         dayRepository.save(dayORM);
     }
@@ -58,8 +58,8 @@ public class DayCRUDService {
     @Transactional
     public void saveConnection(JSONObject s,int id) throws ParseException {
 
-        DayProductsConnectionORM connection = new DayProductsConnectionORM();
-           DayORM dayORM=dayRepository
+        DayProductsConnection connection = new DayProductsConnection();
+           Day dayORM=dayRepository
                    .findDayORMByDateAndAndUserORM(addOneDayToDate(s.getAsString("day")),userService.findUserById(id));
 
         connection.setAmount((int)s.getAsNumber("amount"));
@@ -71,16 +71,16 @@ public class DayCRUDService {
     @Transactional
     public JSONArray getProductsOfDay(String date,int id)
     {
-        DayORM dayORM = dayRepository.findDayORMByDateAndAndUserORM(addOneDayToDate(date),userService.findUserById(id));
+        Day dayORM = dayRepository.findDayORMByDateAndAndUserORM(addOneDayToDate(date),userService.findUserById(id));
         return jsonGenerator.getArray(dayORM.getListOfConnections());
     }
     @Transactional
     public void deleteConnection(String product,String date,int amount,int id)
     {
-        DayORM dayORM=dayRepository.findDayORMByDateAndAndUserORM(addOneDayToDate(date),userService.findUserById(id));
+        Day dayORM=dayRepository.findDayORMByDateAndAndUserORM(addOneDayToDate(date),userService.findUserById(id));
 
-        ProductORM productORM=productCRUDService.getProductbyName(product);
-        DayProductsConnectionORM connectionORM=connectionRepository.getDayProductsConnectionORMByProductAndDayAndAmount(productORM,dayORM,amount);
+        Product productORM=productCRUDService.getProductbyName(product);
+        DayProductsConnection connectionORM=connectionRepository.getDayProductsConnectionORMByProductAndDayAndAmount(productORM,dayORM,amount);
             connectionORM.setProduct(null);
             connectionORM.setDay(null);
 
@@ -88,4 +88,4 @@ public class DayCRUDService {
     }
 
 }
-*/
+

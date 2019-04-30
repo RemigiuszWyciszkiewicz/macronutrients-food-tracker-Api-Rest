@@ -1,10 +1,11 @@
-/*
+
 package com.Remigiusz.MacronutrientsApiREST.Controllers;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.DayORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.DayProductsConnectionORM;
-import com.Remigiusz.MacronutrientsApiREST.DAO.ProductORM;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Day;
+import com.Remigiusz.MacronutrientsApiREST.DAO.DayProductsConnection;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 
+import com.Remigiusz.MacronutrientsApiREST.Service.DayCRUDService;
 import com.Remigiusz.MacronutrientsApiREST.Service.ProductCRUDService;
 import com.Remigiusz.MacronutrientsApiREST.Service.UserService;
 import net.minidev.json.JSONArray;
@@ -27,7 +28,7 @@ public class DayController {
     UserService userService;
 
     @PostMapping("/day/{id}")
-    public void createDayForSpecificUser(@PathVariable(name = "id", required = true) int userId,@RequestParam(name = "date",required = true) String s)
+    public void createDayForSpecificUser(@PathVariable(name = "id", required = true) long userId,@RequestParam(name = "date",required = true) String s)
     {
         System.out.println(s);
 
@@ -35,10 +36,10 @@ public class DayController {
     }
 
     @GetMapping("/days/{id}")
-    List<DayORM> getDays(@PathVariable(name = "id", required = true) int userId)
+    List<Day> getDays(@PathVariable(name = "id", required = true) int userId)
     {
-        List<DayORM> dayORMS=userService.getDaysByUser(userId);
-        return dayORMS;
+        List<Day> days=userService.getDaysByUser(userId);
+        return days;
     }
 
     @PostMapping("/productOfDay/{id}")
@@ -61,4 +62,4 @@ public class DayController {
         dayCRUDService.deleteConnection(productName,date,amount,userId);
     }
 }
-*/
+

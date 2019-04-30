@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "day_product")
-public class DayProductsConnectionORM {
+public class DayProductsConnection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,15 +20,15 @@ public class DayProductsConnectionORM {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "produkt_id")
     @JsonIgnore
-    ProductORM product;
+    Product product;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "day_of_life_id")
     @JsonIgnore
-    DayORM day;
+    Day day;
 
-    public DayProductsConnectionORM() {
+    public DayProductsConnection() {
     }
 
 }

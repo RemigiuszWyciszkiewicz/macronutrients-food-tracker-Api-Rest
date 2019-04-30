@@ -2,7 +2,7 @@ package com.Remigiusz.MacronutrientsApiREST.Service;
 
 import java.util.List;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.ProductORM;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Repository.ProductsRepository;
@@ -17,24 +17,24 @@ public class ProductCRUDService {
     ProductsRepository productsRepository;
 
     @Transactional
-    public void saveProduct(ProductORM productORM) {
+    public void saveProduct(Product product) {
 
-        String[] name=productsRepository.checkIfExists(productORM.getName());
+        String[] name=productsRepository.checkIfExists(product.getName());
 
-        if(name.length==0) productsRepository.save(productORM);
-        else throw new Exception400_BAD_REQUEST("This product already exists - "+ productORM.getName());
+        if(name.length==0) productsRepository.save(product);
+        else throw new Exception400_BAD_REQUEST("This product already exists - "+ product.getName());
     }
 
     @Transactional
-    public ProductORM getProductbyId(int id) {
-        ProductORM productORM=productsRepository.findById(id)
+    public Product getProductbyId(int id) {
+        Product product =productsRepository.findById(id)
                 .orElseThrow(() -> new Exception404_NOT_FOUND("Product with id - "+id+" does not exist"));
-         return productORM;
+         return product;
     }
 
 
     @Transactional
-    public List<ProductORM> getAllProducts() {
+    public List<Product> getAllProducts() {
         productsRepository.findAll();
         return productsRepository.findAll();
     }
@@ -44,9 +44,9 @@ public class ProductCRUDService {
     }
 
     @Transactional
-    public ProductORM getProductbyName(String name) {
-        ProductORM productORM=productsRepository.findProductORMSByName(name)
+    public Product getProductbyName(String name) {
+        Product product =productsRepository.findProductORMSByName(name)
                 .orElseThrow(() -> new Exception404_NOT_FOUND("There is not product like - "+name));
-        return productORM;
+        return product;
     }
 }
