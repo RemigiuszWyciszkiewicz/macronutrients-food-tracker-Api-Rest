@@ -26,7 +26,6 @@ import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
-/*TESTTESTTEST*/
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -60,14 +59,14 @@ public class UserController {
 
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        return new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        long id=userRepository.findByUsername(userDetails.getUsername()).get().getId();
+        return new JwtResponse(id,jwt, userDetails.getUsername(), userDetails.getAuthorities());
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 
-
+        System.out.println(signUpRequest.toString());
 
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new SimpleMessage("Fail -> Username is already taken!"),
@@ -112,5 +111,5 @@ public class UserController {
 
         return new ResponseEntity<>(new SimpleMessage("User registered successfully!"), HttpStatus.OK);
     }
-    
+
 }
