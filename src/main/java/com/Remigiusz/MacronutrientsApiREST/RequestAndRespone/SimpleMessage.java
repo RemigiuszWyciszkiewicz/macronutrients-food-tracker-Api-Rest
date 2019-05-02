@@ -1,4 +1,4 @@
-package com.Remigiusz.MacronutrientsApiREST.Exceptions;
+package com.Remigiusz.MacronutrientsApiREST.RequestAndRespone;
 
 public class SimpleMessage {
 	private String message;

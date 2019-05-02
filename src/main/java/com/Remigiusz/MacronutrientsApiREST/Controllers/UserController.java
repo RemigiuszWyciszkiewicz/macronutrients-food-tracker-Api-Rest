@@ -3,6 +3,7 @@ package com.Remigiusz.MacronutrientsApiREST.Controllers;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Role;
 import com.Remigiusz.MacronutrientsApiREST.DAO.RoleName;
 import com.Remigiusz.MacronutrientsApiREST.DAO.User;
+import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Repository.RoleRepository;
 import com.Remigiusz.MacronutrientsApiREST.Repository.UserRepository;
 import com.Remigiusz.MacronutrientsApiREST.Security.JwtProvider;
@@ -10,7 +11,7 @@ import com.Remigiusz.MacronutrientsApiREST.Service.UserService;
 import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.LoginForm;
 import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.SignUpForm;
 import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.JwtResponse;
-import com.Remigiusz.MacronutrientsApiREST.Exceptions.SimpleMessage;
+import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.SimpleMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,19 +67,17 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 
-        System.out.println(signUpRequest.toString());
+
 
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<>(new SimpleMessage("Fail -> Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
+            throw new Exception400_BAD_REQUEST("This username is already taken");
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<>(new SimpleMessage("Fail -> Email is already in use!"),
-                    HttpStatus.BAD_REQUEST);
+            throw new Exception400_BAD_REQUEST("This email is already taken");
         }
 
-        // Creating user's account
+
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 

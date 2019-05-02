@@ -31,13 +31,17 @@ public class ProductController {
     {
         if(crudService.getProductbyName(name)== null) throw new Exception404_NOT_FOUND("There is not product like - "+name);
         else crudService.deleteProduct(name);
+
     }
 
     @GetMapping("/product/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     Product getProductById(@PathVariable int id)
     {
+
         return crudService.getProductbyId(id);
+
+
 
 
     }
