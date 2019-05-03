@@ -65,7 +65,7 @@ public class DayCRUDService {
         connection.setAmount((int)s.getAsNumber("amount"));
         connection.setProduct(productCRUDService.getProductbyName(s.getAsString("product")));
         connection.setDay(dayORM);
-        System.out.println(connection);
+
         connectionRepository.save(connection);
     }
 
