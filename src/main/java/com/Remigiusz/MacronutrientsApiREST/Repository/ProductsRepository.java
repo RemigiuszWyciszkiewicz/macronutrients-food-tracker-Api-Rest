@@ -20,4 +20,4 @@ public interface ProductsRepository extends JpaRepository<Product,Integer> {
 
     Optional<Product> findProductORMSByName(String name);
 }
- /*   git commit -m "not accepted product dao added"*/
+

@@ -2,8 +2,9 @@ package com.Remigiusz.MacronutrientsApiREST.Service;
 
 import java.util.List;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProducts;
+import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProduct;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
+import com.Remigiusz.MacronutrientsApiREST.DAO.User;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Repository.NotAcceptedProductsRepository;
@@ -14,17 +15,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductCRUDService {
-//testeestetwtata
+
     @Autowired
     ProductsRepository productsRepository;
 
     @Autowired
     NotAcceptedProductsRepository notAcceptedProductsRepository;
 
-    @Transactional
-    public void saveProduct(NotAcceptedProducts product) {
+    @Autowired
+    UserService userService;
 
-        NotAcceptedProducts notAcceptedProducts=notAcceptedProductsRepository.findByName(product.getName())
+    @Transactional
+    public void saveProduct(NotAcceptedProduct product) {
+
+        NotAcceptedProduct notAcceptedProducts=notAcceptedProductsRepository.findByName(product.getName())
                 .orElseGet(() -> notAcceptedProductsRepository.save(product));
 
         if (notAcceptedProducts != null) throw new Exception400_BAD_REQUEST("this product already exists");
@@ -48,9 +52,10 @@ public class ProductCRUDService {
 
 
     @Transactional
-    public List<NotAcceptedProducts> getNotAcceptedProducts(long id)
+    public List<NotAcceptedProduct> getNotAcceptedProducts(long id)
     {
-        return notAcceptedProductsRepository.findAllByUserList(id);
+        User user=userService.findUserById(id);
+        return notAcceptedProductsRepository.findAllByUser(user);
     }
     @Transactional
     public void deleteProduct(String name) {

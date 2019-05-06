@@ -1,11 +1,10 @@
 package com.Remigiusz.MacronutrientsApiREST.Controllers;
 
-import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProducts;
+import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProduct;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Service.ProductCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +22,9 @@ public class ProductController {
 
 
 
-    @PostMapping("/product/{id}")
+    @PostMapping("/product")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public void saveProduct(@RequestBody NotAcceptedProducts product, @RequestParam long id)
+    public void saveProduct(@RequestBody NotAcceptedProduct product)
     {
         crudService.saveProduct(product);
     }
@@ -46,6 +45,7 @@ public class ProductController {
         return crudService.getProductbyId(id);
     }
 
+
     @GetMapping("/product")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     Product getProductByName(@RequestParam(value = "name",required = true) String name)
@@ -61,11 +61,13 @@ public class ProductController {
         return productList;
 
     }
-    @GetMapping("/NotAcceptedProducts/{id}")
+
+
+    @GetMapping("/NotAcceptedProduct/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    ResponseEntity<List<NotAcceptedProducts>> getAllNotAcceptedProducts(@RequestParam long id)
+    ResponseEntity<List<NotAcceptedProduct>> getAllNotAcceptedProducts(@PathVariable long id)
     {
-        List<NotAcceptedProducts> productList=crudService.getNotAcceptedProducts(id);
+        List<NotAcceptedProduct> productList=crudService.getNotAcceptedProducts(id);
 
         return ResponseEntity.ok(productList);
     }
