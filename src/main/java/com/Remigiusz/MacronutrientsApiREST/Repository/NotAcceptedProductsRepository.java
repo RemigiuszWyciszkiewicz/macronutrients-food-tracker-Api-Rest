@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface NotAcceptedProductsRepository extends JpaRepository<NotAcceptedProducts,Long> {
 
     Optional<NotAcceptedProducts> findByName(String name);
+
+    List<NotAcceptedProducts> findAllByUserList(long id);
 }

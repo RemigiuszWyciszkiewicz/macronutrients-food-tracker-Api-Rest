@@ -1,9 +1,12 @@
 package com.Remigiusz.MacronutrientsApiREST.Controllers;
 
+import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProducts;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Service.ProductCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +21,11 @@ public class ProductController {
     @Autowired
     ProductCRUDService crudService;
 
-    @PostMapping("/product")
+
+
+    @PostMapping("/product/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public void saveProduct(@RequestBody Product product)
+    public void saveProduct(@RequestBody NotAcceptedProducts product, @RequestParam long id)
     {
         crudService.saveProduct(product);
     }
@@ -48,12 +53,20 @@ public class ProductController {
       return crudService.getProductbyName(name);
     }
 
-    @GetMapping("/products")
+    @GetMapping("/acceptedProducts")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    List<Product> getAllProducts()
+    List<Product> getAllAcceptedProducts()
     {
         List<Product> productList=crudService.getAllProducts();
         return productList;
 
+    }
+    @GetMapping("/NotAcceptedProducts/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    ResponseEntity<List<NotAcceptedProducts>> getAllNotAcceptedProducts(@RequestParam long id)
+    {
+        List<NotAcceptedProducts> productList=crudService.getNotAcceptedProducts(id);
+
+        return ResponseEntity.ok(productList);
     }
 }
