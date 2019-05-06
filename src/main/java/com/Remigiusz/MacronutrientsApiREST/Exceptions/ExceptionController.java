@@ -34,10 +34,10 @@ public class ExceptionController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ResponseEntity<ErrorDetails> invalid(MethodArgumentNotValidException e, WebRequest webRequest)
     {
-        System.out.println(e.getLocalizedMessage());
+
         System.out.println(e.getBindingResult());
-        System.out.println(e.getParameter());
-        ErrorDetails customerErrorResponse=new ErrorDetails(HttpStatus.BAD_REQUEST.value(),e.getMessage(),webRequest.getDescription(false));
+
+        ErrorDetails customerErrorResponse=new ErrorDetails(HttpStatus.BAD_REQUEST.value(),"unvalid",webRequest.getDescription(false));
 
         return new ResponseEntity<>(customerErrorResponse, HttpStatus.BAD_REQUEST);
     }

@@ -15,14 +15,10 @@ public interface ProductsRepository extends JpaRepository<Product,Integer> {
     @Modifying
     @Query("delete from Product a where a.name=:name")
      void deleteByName(@Param("name") String name);
-/*
-    @Query("select a from Product a where a.name=:name")
-    Product getByName(@Param("name") String name);*/
 
     @Query("select name from Product a where a.name=:name")
     String[] checkIfExists(@Param("name") String name);
 
-    // void deleteProductORMByName(String name);
 
     Optional<Product> findProductORMSByName(String name);
 }

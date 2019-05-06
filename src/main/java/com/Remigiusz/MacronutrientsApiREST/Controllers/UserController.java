@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
-/*TESTTEST*/
+
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -55,7 +55,8 @@ public class UserController {
     @PostMapping("/signin")
     public JwtResponse authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
+
+                Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -91,7 +92,7 @@ public class UserController {
         if(strRoles.contains("user"))
         {
             Role role = roleRepository.findByName(RoleName.ROLE_USER)
-                    .orElseThrow( () -> new Exception404_NOT_FOUND("ther is no role like this" ));
+                    .orElseThrow( () -> new Exception404_NOT_FOUND("there is no role like this" ));
 
             roles.add(role);
         }
@@ -105,6 +106,7 @@ public class UserController {
         }
 
         user.setRoles(roles);
+
         userRepository.save(user);
 
         return new ResponseEntity<>(new SimpleMessage("User registered successfully!"), HttpStatus.OK);

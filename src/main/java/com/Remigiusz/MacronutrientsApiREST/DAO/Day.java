@@ -23,7 +23,7 @@ public class Day {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "today")
     @Temporal(TemporalType.DATE)
@@ -35,16 +35,16 @@ public class Day {
     @JoinTable(name = "day_product"
             ,joinColumns = @JoinColumn(name = "day_of_life_id")
             ,inverseJoinColumns =@JoinColumn(name = "produkt_id") )
-    List<Product> products =new ArrayList<>();
+    private List<Product> products =new ArrayList<>();
 
 
     @OneToMany(mappedBy = "day",fetch = FetchType.LAZY)
-    List<DayProductsConnection> ListOfConnections =new ArrayList<>();
+    private List<DayProductsConnection> ListOfConnections =new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne(cascade ={ CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
-    User userORM;
+    private User userORM;
 
 
 

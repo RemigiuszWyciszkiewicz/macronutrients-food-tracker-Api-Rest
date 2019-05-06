@@ -20,17 +20,18 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
     @Column(name = "nazwa")
-    String name;
+    private String name;
     @Column(name = "kcal")
-    int calories;
+    private int calories;
     @Column(name = "bialko")
-    float protein;
+    private float protein;
     @Column(name = "tluszcze")
-    float fats;
+    private float fats;
     @Column(name = "weglowodany")
-    float carbohydrates;
+    private float carbohydrates;
+
 
     @ManyToMany(fetch = FetchType.LAZY,cascade ={CascadeType.DETACH
             , CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -38,10 +39,10 @@ public class Product {
             ,joinColumns = @JoinColumn(name = "produkt_id")
             ,inverseJoinColumns = @JoinColumn(name = "day_of_life_id"))
     @JsonIgnore
-    List<Day> daysList=new ArrayList<>();
+    private List<Day> daysList=new ArrayList<>();
 
     @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
-    List<DayProductsConnection> connectionsList=new ArrayList<>();
+    private List<DayProductsConnection> connectionsList=new ArrayList<>();
 
 
 

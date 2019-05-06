@@ -2,6 +2,7 @@ package com.Remigiusz.MacronutrientsApiREST.Service;
 
 import java.util.List;
 
+import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProducts;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
@@ -15,6 +16,9 @@ public class ProductCRUDService {
 //testeestetwtata
     @Autowired
     ProductsRepository productsRepository;
+
+    @Autowired
+    NotAcceptedProducts notAcceptedProducts;
 
     @Transactional
     public void saveProduct(Product product) {

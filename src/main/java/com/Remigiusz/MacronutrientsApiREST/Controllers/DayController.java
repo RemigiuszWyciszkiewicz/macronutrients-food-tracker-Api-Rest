@@ -33,7 +33,7 @@ public class DayController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public void createDayForSpecificUser(@PathVariable(name = "id", required = true) long userId,@RequestParam(name = "date",required = true) String s)
     {
-        System.out.println(s);
+
 
         dayCRUDService.addNewDay(userId,s);
     }
@@ -50,7 +50,7 @@ public class DayController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     void createConnection(@RequestBody JSONObject s,@PathVariable(name = "id",required = true) int userId) throws ParseException {
 
-        System.out.println(s);
+
         dayCRUDService.saveConnection(s,userId);
     }
 

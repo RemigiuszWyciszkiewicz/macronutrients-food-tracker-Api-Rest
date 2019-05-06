@@ -28,7 +28,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
+    private Long id;
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -48,15 +48,16 @@ public class User {
     @Size(min=6, max = 100)
     private String password;
 
-
-   @OneToMany(mappedBy = "userORM",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-   List<Day> days =new ArrayList<>();
+    @OneToMany(mappedBy = "userORM",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Day> days =new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+
 
 
 }

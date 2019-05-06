@@ -12,21 +12,21 @@ public class DayProductsConnection {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "ilosc")
-    int amount;
+    private int amount;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "produkt_id")
     @JsonIgnore
-    Product product;
+    private Product product;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "day_of_life_id")
     @JsonIgnore
-    Day day;
+    private Day day;
 
     public DayProductsConnection() {
     }
