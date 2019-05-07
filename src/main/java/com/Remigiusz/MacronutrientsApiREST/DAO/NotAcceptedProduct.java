@@ -1,5 +1,6 @@
 package com.Remigiusz.MacronutrientsApiREST.DAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -45,6 +46,7 @@ public class NotAcceptedProduct {
     private float carbohydrates;
 
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;

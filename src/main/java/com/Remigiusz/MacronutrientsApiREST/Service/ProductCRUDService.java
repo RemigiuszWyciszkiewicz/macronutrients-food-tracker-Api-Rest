@@ -65,11 +65,15 @@ public class ProductCRUDService {
     public List<NotAcceptedProduct> getNotAcceptedProducts(long id)
     {
         User user=userService.findUserById(id);
-        return notAcceptedProductsRepository.findAllByUser(user);
+        return user.getNotAcceptedProducts();
     }
     @Transactional
     public void deleteProduct(String name) {
         productsRepository.deleteByName(name);
+    }
+    @Transactional
+    public void deleteNotAcceptedProduct(String name) {
+        notAcceptedProductsRepository.deleteByName(name);
     }
 
     @Transactional

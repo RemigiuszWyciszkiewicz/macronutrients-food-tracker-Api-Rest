@@ -15,5 +15,7 @@ public interface NotAcceptedProductsRepository extends JpaRepository<NotAccepted
 
     Optional<NotAcceptedProduct> findByName(String name);
 
-    List<NotAcceptedProduct> findAllByUser(User user);
+    void deleteByName(String name);
+
+    /*List<NotAcceptedProduct> findAllByUser(User user);*/
 }

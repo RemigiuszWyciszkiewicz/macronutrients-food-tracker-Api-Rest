@@ -40,6 +40,13 @@ public class ProductController {
 
     }
 
+    @DeleteMapping("/notAcceptedProduct")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public void deleteNotAcceptedProduct(@RequestParam("name") String name)
+    {
+        crudService.deleteNotAcceptedProduct(name);
+    }
+
     @GetMapping("/product/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     Product getProductById(@PathVariable int id)
@@ -69,8 +76,12 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     ResponseEntity<List<NotAcceptedProduct>> getAllNotAcceptedProducts(@PathVariable long id)
     {
+        System.out.println(id);
         List<NotAcceptedProduct> productList=crudService.getNotAcceptedProducts(id);
 
         return ResponseEntity.ok(productList);
     }
+
+
+
 }
