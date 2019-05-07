@@ -29,11 +29,20 @@ public class ProductCRUDService {
     @Transactional
     public void saveProduct(NewProductForm product) {
 
-        NotAcceptedProduct notAcceptedProducts=notAcceptedProductsRepository.findByName(product.getName()).get();
+        User user=userService.findUserById(product.getUserId());
 
+        notAcceptedProductsRepository.findByName(product.getName()).ifPresent(notAcceptedProduct -> { throw new Exception400_BAD_REQUEST("This product already exists!"); });
+        productsRepository.findProductORMSByName(product.getName()).ifPresent(notAcceptedProduct -> { throw new Exception400_BAD_REQUEST("This product already exists!"); });
 
-        if (notAcceptedProducts != null) throw new Exception400_BAD_REQUEST("this product already exists");
+        NotAcceptedProduct notAcceptedProduct= new NotAcceptedProduct(
+                product.getName(),
+                product.getCalories(),
+                product.getProtein(),
+                product.getFats(),
+                product.getCarbohydrates(),
+                user);
 
+        notAcceptedProductsRepository.save(notAcceptedProduct);
 
     }
 

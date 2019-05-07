@@ -27,7 +27,7 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public void saveProduct(@RequestBody NewProductForm product)
     {
-        System.out.println(product);
+
         crudService.saveProduct(product);
     }
 

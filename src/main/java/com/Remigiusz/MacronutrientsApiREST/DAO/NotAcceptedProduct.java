@@ -1,5 +1,6 @@
 package com.Remigiusz.MacronutrientsApiREST.DAO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +14,15 @@ import java.util.List;
 public class NotAcceptedProduct {
 
     public NotAcceptedProduct() {
+    }
+
+    public NotAcceptedProduct(String name, int calories, float protein, float fats, float carbohydrates, User user) {
+        this.name = name;
+        this.calories = calories;
+        this.protein = protein;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+        this.user = user;
     }
 
     @Id
