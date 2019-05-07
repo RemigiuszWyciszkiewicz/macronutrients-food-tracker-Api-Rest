@@ -9,6 +9,7 @@ import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Repository.NotAcceptedProductsRepository;
 import com.Remigiusz.MacronutrientsApiREST.Repository.ProductsRepository;
+import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.NewProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +27,10 @@ public class ProductCRUDService {
     UserService userService;
 
     @Transactional
-    public void saveProduct(NotAcceptedProduct product) {
+    public void saveProduct(NewProductForm product) {
 
-        NotAcceptedProduct notAcceptedProducts=notAcceptedProductsRepository.findByName(product.getName())
-                .orElseGet(() -> notAcceptedProductsRepository.save(product));
+        NotAcceptedProduct notAcceptedProducts=notAcceptedProductsRepository.findByName(product.getName()).get();
+
 
         if (notAcceptedProducts != null) throw new Exception400_BAD_REQUEST("this product already exists");
 
