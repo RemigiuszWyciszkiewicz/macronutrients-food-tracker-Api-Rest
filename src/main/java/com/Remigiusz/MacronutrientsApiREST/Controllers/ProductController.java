@@ -27,10 +27,13 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public void saveNotAcceptedProduct(@RequestBody ProductForm product)
     {
+        //It capitalizes first lettr
+        product.setName(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1));
+
         crudService.saveNotAcceptedProduct(product);
     }
 
-    @PostMapping("/notAcceptedProduct")
+    @PostMapping("/product")
     @PreAuthorize("hasRole('ADMIN')")
     public void saveProduct(@RequestBody ProductForm product)
     {
@@ -80,12 +83,17 @@ public class ProductController {
 
     @GetMapping("/NotAcceptedProduct/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    ResponseEntity<List<NotAcceptedProduct>> getAllNotAcceptedProducts(@PathVariable long id)
+    ResponseEntity<List<NotAcceptedProduct>> getAllNotAcceptedProductsByUserID(@PathVariable long id)
     {
-        System.out.println(id);
-        List<NotAcceptedProduct> productList=crudService.getNotAcceptedProducts(id);
+        List<NotAcceptedProduct> productList=crudService.getNotAcceptedProductsByUser(id);
 
         return ResponseEntity.ok(productList);
+    }
+    @GetMapping("/NotAcceptedProduct")
+    @PreAuthorize("hasRole('ADMIN')")
+    ResponseEntity<List<NotAcceptedProduct>> getAllNotAcceptedProducts()
+    {
+        return ResponseEntity.ok(crudService.getNotAcceptedProducts());
     }
 
 

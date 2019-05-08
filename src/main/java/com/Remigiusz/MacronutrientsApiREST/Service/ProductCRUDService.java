@@ -47,7 +47,7 @@ public class ProductCRUDService {
     }
 
     @Transactional
-    void saveProduct(ProductForm productForm) {
+    public void saveProduct(ProductForm productForm) {
 
         notAcceptedProductsRepository.deleteByName(productForm.getName());
         productsRepository.save(new Product(productForm.getName(),productForm.getCalories(),productForm.getProtein(),productForm.getFats(),productForm.getCarbohydrates()));
@@ -69,10 +69,16 @@ public class ProductCRUDService {
 
 
     @Transactional
-    public List<NotAcceptedProduct> getNotAcceptedProducts(long id)
+    public List<NotAcceptedProduct> getNotAcceptedProductsByUser(long id)
     {
         User user=userService.findUserById(id);
         return user.getNotAcceptedProducts();
+    }
+
+    @Transactional
+    public List<NotAcceptedProduct> getNotAcceptedProducts()
+    {
+        return notAcceptedProductsRepository.findAll();
     }
     @Transactional
     public void deleteProduct(String name) {

@@ -67,7 +67,7 @@ public class UserController {
         long id=userRepository.findByUsername(userDetails.getUsername()).get().getId();
 
         return new JwtResponse(id,jwt, userDetails.getUsername(), userDetails.getAuthorities());
-    }
+}
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
