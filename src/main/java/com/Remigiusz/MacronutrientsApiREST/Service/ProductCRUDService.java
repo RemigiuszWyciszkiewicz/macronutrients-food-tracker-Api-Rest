@@ -9,7 +9,7 @@ import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Repository.NotAcceptedProductsRepository;
 import com.Remigiusz.MacronutrientsApiREST.Repository.ProductsRepository;
-import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.NewProductForm;
+import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.ProductForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +27,7 @@ public class ProductCRUDService {
     UserService userService;
 
     @Transactional
-    public void saveProduct(NewProductForm product) {
+    public void saveNotAcceptedProduct(ProductForm product) {
 
         User user=userService.findUserById(product.getUserId());
 
@@ -44,6 +44,13 @@ public class ProductCRUDService {
 
         notAcceptedProductsRepository.save(notAcceptedProduct);
 
+    }
+
+    @Transactional
+    void saveProduct(ProductForm productForm) {
+
+        notAcceptedProductsRepository.deleteByName(productForm.getName());
+        productsRepository.save(new Product(productForm.getName(),productForm.getCalories(),productForm.getProtein(),productForm.getFats(),productForm.getCarbohydrates()));
     }
 
     @Transactional

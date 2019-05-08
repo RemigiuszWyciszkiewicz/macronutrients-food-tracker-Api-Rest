@@ -3,7 +3,7 @@ package com.Remigiusz.MacronutrientsApiREST.Controllers;
 import com.Remigiusz.MacronutrientsApiREST.DAO.NotAcceptedProduct;
 import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
-import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.NewProductForm;
+import com.Remigiusz.MacronutrientsApiREST.RequestAndRespone.ProductForm;
 import com.Remigiusz.MacronutrientsApiREST.Service.ProductCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +25,15 @@ public class ProductController {
 
     @PostMapping("/notAcceptedProduct")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public void saveProduct(@RequestBody NewProductForm product)
+    public void saveNotAcceptedProduct(@RequestBody ProductForm product)
     {
+        crudService.saveNotAcceptedProduct(product);
+    }
 
+    @PostMapping("/notAcceptedProduct")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void saveProduct(@RequestBody ProductForm product)
+    {
         crudService.saveProduct(product);
     }
 

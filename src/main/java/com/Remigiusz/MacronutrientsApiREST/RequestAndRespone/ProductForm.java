@@ -5,9 +5,9 @@ import lombok.Data;
 import javax.persistence.Column;
 
 @Data
-public class NewProductForm {
+public class ProductForm {
 
-    public NewProductForm() {
+    public ProductForm() {
     }
 
     private String name;

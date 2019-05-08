@@ -16,7 +16,13 @@ public class Product {
 
     }
 
-
+    public Product(String name, int calories, float protein, float fats, float carbohydrates) {
+        this.name = name;
+        this.calories = calories;
+        this.protein = protein;
+        this.fats = fats;
+        this.carbohydrates = carbohydrates;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
