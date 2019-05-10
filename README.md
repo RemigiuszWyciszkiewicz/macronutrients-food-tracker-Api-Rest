@@ -25,13 +25,13 @@ by sending **JSON** objects or appropiate error message.
 - Transfer product from one table to other.
 - Fetch user details.
 
-# Data
+# Data:
 
 Communication with **MySql** database is handled by **Spring Data**. Below you can see diagram of tables.
 
 ![](src/main/resources/model_bazy.PNG)
 
-# Security
+# Security:
 
  This application is secured with JSON Web Token (JWT) authentication and Spring Security. Each request *(exept: /signin, /singup)* is checked by AuthTokenFilter which validate jwt token and control the roles in order to determine which resouces can be returned.
  
