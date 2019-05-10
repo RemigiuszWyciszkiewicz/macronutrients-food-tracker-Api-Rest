@@ -29,8 +29,16 @@ by sending **JSON** objects or appropiate error message.
 
 Communication with **MySql** database is handled by **Spring Data**. Below you can see diagram of tables.
 
+![](src/main/resources/model_bazy.PNG)
 
+# Security
 
+ This application is secured with JSON Web Token (JWT) authentication and Spring Security. Each request *(exept: /signin, /singup)* is checked by AuthTokenFilter which validate jwt token and control the roles in order to determine which resouces can be returned.
+ 
+ When client sends */signup* request,aplication validate json data which are included in request then saves user in database.If data is not valid controller sends appropiate response.
+ 
+ When client sends */signin* request,Spring security autheticates recived data then if result is positive, jwt token is created on the basis of recived data.If not,Api sends appropiate response.Previously created token is returned to client.
+ 
 
 
 
