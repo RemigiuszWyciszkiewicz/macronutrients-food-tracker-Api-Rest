@@ -5,7 +5,7 @@ by sending **JSON** objects or appropiate error message.
 
 # Features:
 
-**Through back-end app you can**
+**Through back-end app you can:**
 
 ### As User
 
