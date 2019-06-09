@@ -1,4 +1,4 @@
-package com.Remigiusz.MacronutrientsApiREST.Service;
+package com.Remigiusz.MacronutrientsApiREST.Utility;
 
 public class MacrosCalculator {
 

@@ -7,6 +7,7 @@ import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.DAO.User;
 import com.Remigiusz.MacronutrientsApiREST.Repository.ConnectionRepository;
 import com.Remigiusz.MacronutrientsApiREST.Repository.DayRepository;
+import com.Remigiusz.MacronutrientsApiREST.Utility.JsonGenerator;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class DayCRUDService {

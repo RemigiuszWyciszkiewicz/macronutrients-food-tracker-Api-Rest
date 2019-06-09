@@ -1,15 +1,19 @@
 package com.Remigiusz.MacronutrientsApiREST.Service;
 
 import com.Remigiusz.MacronutrientsApiREST.DAO.Day;
+import com.Remigiusz.MacronutrientsApiREST.DAO.Product;
 import com.Remigiusz.MacronutrientsApiREST.DAO.User;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception400_BAD_REQUEST;
 import com.Remigiusz.MacronutrientsApiREST.Exceptions.Exception404_NOT_FOUND;
 import com.Remigiusz.MacronutrientsApiREST.Repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+;
+
 
 @Service
 public class UserService {
@@ -45,9 +49,6 @@ public class UserService {
     {
     return findUserById(id).getDays();
     }
-
-
-
 
 
 

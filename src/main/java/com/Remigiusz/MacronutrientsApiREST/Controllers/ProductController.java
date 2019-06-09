@@ -27,7 +27,7 @@ public class ProductController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public void saveNotAcceptedProduct(@RequestBody ProductForm product)
     {
-        //It capitalizes first lettr
+        //It capitalizes first letter
         product.setName(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1));
 
         crudService.saveNotAcceptedProduct(product);

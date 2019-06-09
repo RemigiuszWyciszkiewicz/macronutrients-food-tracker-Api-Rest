@@ -1,7 +1,7 @@
 package com.Remigiusz.MacronutrientsApiREST.RequestAndRespone;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+        import javax.validation.constraints.NotBlank;
+        import javax.validation.constraints.Size;
 
 public class LoginForm {
     @NotBlank

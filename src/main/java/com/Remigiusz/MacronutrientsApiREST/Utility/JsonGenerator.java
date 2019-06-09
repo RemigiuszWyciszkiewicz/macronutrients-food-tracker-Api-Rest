@@ -1,4 +1,4 @@
-package com.Remigiusz.MacronutrientsApiREST.Service;
+package com.Remigiusz.MacronutrientsApiREST.Utility;
 
 import com.Remigiusz.MacronutrientsApiREST.DAO.DayProductsConnection;
 import net.minidev.json.JSONArray;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JsonGenerator {
 
-    JSONArray getArray(List<DayProductsConnection> list)
+    public JSONArray getArray(List<DayProductsConnection> list)
     {
         JSONArray calculatedProductsReadyToSend=new JSONArray();
         for(DayProductsConnection a:list)
