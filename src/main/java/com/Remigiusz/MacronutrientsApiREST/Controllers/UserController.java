@@ -100,7 +100,7 @@ public class UserController {
         if(strRoles.contains("admin"))
         {
             Role role = roleRepository.findByName(RoleName.ROLE_ADMIN)
-                    .orElseThrow( () -> new Exception404_NOT_FOUND("ther is no role like this" ));
+                    .orElseThrow( () -> new Exception404_NOT_FOUND("there is no role like this" ));
 
             roles.add(role);
         }
